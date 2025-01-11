@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { logger } from "./logger";
 
 export const prismaClient = new PrismaClient({
     log: [
@@ -36,3 +37,4 @@ prismaClient.$on('info',(e)=>{
 prismaClient.$on('query',(e)=>{
     logger.info(e);
 })
+

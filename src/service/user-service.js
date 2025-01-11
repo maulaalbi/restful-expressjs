@@ -1,11 +1,12 @@
-import { responseError } from "../error/response-error";
-import { registerUserValidation } from "../validation/user-validation";
-import { validate } from "../validation/validation";
+import { prismaClient } from "../application/database.js";
+import { responseError } from "../error/response-error.js";
+import { registerUserValidation } from "../validation/user-validation.js";
+import { validate } from "../validation/validation.js";
 import bcrypt from "bcrypt";
 
 
-const register = async (request) =>{
-    const user = validate(registerUserValidation);
+const register = async (body) =>{
+    const user = validate(registerUserValidation, body);
 
     const countUser = await prismaClient.user.count({
         where : {
@@ -29,6 +30,6 @@ const register = async (request) =>{
 
 }
 
-export{
+export default{
     register
 }
